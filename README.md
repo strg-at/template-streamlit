@@ -29,7 +29,6 @@ This repo is a template to quick start a streamlit application for proof of conc
   - [Streamlit](#streamlit)
   - [Prerequisties](#prerequisties)
   - [Initialize repository](#initialize-repository)
-  - [Coverage report](#coverage-report)
   - [Pre-commit](#pre-commit)
   - [Preparation](#preparation)
 - [Known Issues](#known-issues)
@@ -165,6 +164,7 @@ task app:run
 ```
 
 Otherwise the app can also be started with the manual command:
+
 ```bash
 streamlit run template_streamlit/main.py
 ```
@@ -202,24 +202,6 @@ Pre-commit framework need to get initialized.
 
 ```console
 task pre-commit:init
-```
-
-### Coverage report
-
-Run coverage report.
-
-```bash
-sh ./coverage_report.sh
-```
-
-```bash
-Name                                                                Stmts   Miss  Cover
----------------------------------------------------------------------------------------
-template_python/template_python_package/template_python_module.py       6      0   100%
-template_python/unittest/template_python_test.py                       18      1    94%
----------------------------------------------------------------------------------------
-TOTAL                                                                  24      1    96%
-
 ```
 
 ### Pre-commit

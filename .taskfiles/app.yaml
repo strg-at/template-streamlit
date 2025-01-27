@@ -5,10 +5,9 @@ tasks:
   init:
     desc: Initialize streamlit app
     cmds:
+      - poetry env use `which python 3.12`
       - poetry install
-      - source ./activate.sh
-      -
   run:
     desc: Run streamlit app
     cmds:
-      - streamlit run template_streamlit/main.py
+      - poetry run streamlit run template_streamlit/main.py

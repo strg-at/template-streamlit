@@ -82,13 +82,7 @@ with st.expander("Plotly Chart"):
 with st.expander("Seaborn Chart"):
     st.markdown("### Charting with Seaborn (based on plotly)")
 
-    plot = sns.scatterplot(
-        df,
-        x="x-axis",
-        y="y-axis",
-        hue='color',
-        size='color'
-    )
+    plot = sns.scatterplot(df, x="x-axis", y="y-axis", hue="color", size="color")
 
     # Display the plot in Streamlit
     st.pyplot(plot.figure)

@@ -1,0 +1,14 @@
+---
+version: "3"
+
+tasks:
+  init:
+    desc: Initialize streamlit app
+    cmds:
+      - poetry install
+      - source ./activate.sh
+      -
+  run:
+    desc: Run streamlit app
+    cmds:
+      - streamlit run template_streamlit/main.py

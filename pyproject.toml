@@ -1,0 +1,68 @@
+[tool.poetry]
+name = "template_streamlit"
+version = "0.1.0"
+description = "template for streamlit app"
+authors = ["strg.at"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12,<3.14"
+pandas = "^2.2.3"
+matplotlib = "^3.9.2"
+seaborn = "^0.13.2"
+streamlit = "^1.40.1"
+plotly = "^5.24.1"
+python-dotenv = "^1.0.1"
+altair = "^5.5.0"
+pydantic = "2.9.2"
+tqdm = "^4.67.1"
+numpy = "^2.2.2"
+
+# We explictly pin torch, as this is a dependency of llama-index.
+# Otherwise, torch from PyPI will bring all the nvidia deps.
+torch = [
+  {version = "^2.5.1+cpu", source = "pytorch-cpu-src", platform = "linux"},
+  {version = "^2.5.1", platform = "darwin"},
+]
+
+# [tool.poetry.group.release]
+# optional = true
+#
+# [tool.poetry.group.release.dependencies]
+# torch = {version = "^2.5.1+cu121", source = "pytorch-gpu-src"}
+
+[tool.poetry.group.lsp-dev]
+optional = true
+
+[tool.poetry.group.lsp-dev.dependencies]
+pylsp-mypy = "^0.6.8"
+python-lsp-server = "^1.11.0"
+
+# This can be added with
+# poetry source add --priority=explicit pytorch-cpu-src https://download.pytorch.org/whl/cpu
+[[tool.poetry.source]]
+name = "pytorch-cpu-src"
+url = "https://download.pytorch.org/whl/cpu"
+priority = "explicit"
+
+[[tool.poetry.source]]
+name = "pytorch-gpu-src"
+url = "https://download.pytorch.org/whl/cu121"
+priority = "explicit"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+# Specify here any specific rules.
+# For instance, this is if we want max. line-length to be 120:
+line-length = 120
+
+[tool.ruff]
+ignore = ["E501"]
+line-length = 120
+
+[tool.mypy]
+ignore_missing_imports = true

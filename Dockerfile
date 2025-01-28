@@ -7,7 +7,7 @@ WORKDIR /app
 COPY . .
 
 RUN useradd -m strg \
-      && chown -R strg /app
+    && chown -R strg /app
 
 USER strg
 
@@ -17,7 +17,9 @@ ENV POETRY_NO_INTERACTION=1 \
     POETRY_VIRTUALENVS_IN_PROJECT=1 \
     POETRY_VIRTUALENVS_CREATE=1
 
-RUN pipx ensurepath && pipx install poetry==1.8.4 && poetry install
+RUN pipx ensurepath && pipx install poetry==1.8.4 && \
+    poetry add streamlit seaborn tqdm matplotlib altair \
+    pydantic plotly numpy pandas && poetry install
 
 ENV PATH="/app/.venv/bin:$PATH"
 

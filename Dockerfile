@@ -21,4 +21,4 @@ RUN pipx ensurepath && pipx install poetry==1.8.4 && poetry install
 
 ENV PATH="/app/.venv/bin:$PATH"
 
-RUN poetry run streamlit run template_streamlit/main.py
+CMD ["poetry", "run", "streamlit", "run", "template_streamlit/main.py"]

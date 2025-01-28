@@ -25,6 +25,7 @@ This repo is a template to quick start a streamlit application for proof of conc
 
 - [Code-Style](#code-style)
 - [Getting Started](#getting-started)
+  - [Setup](#setup)
   - [Using Poetry](#using-poetry)
   - [Streamlit](#streamlit)
   - [Prerequisties](#prerequisties)
@@ -46,43 +47,51 @@ This Python project is managed via [Poetry](https://python-poetry.org/), and lev
 configuration file, rather than the older `setup.py`.
 The `pyproject.toml` configuration file can be and is also used to store 3rd party tools configurations, such as black, ruff, mypy etc.
 
-### Using Poetry
+### Setup
 
-In order to use poetry, you should [install it first](https://python-poetry.org/docs/#installing-with-pipx). If your OS package manager has
-a `python-poetry` package, you might also choose to install Poetry that way. **Notice** that if you do this, you should make sure that your OS
-also ships all the necessary plugins you might want to use (most importantly, `poetry-plugin-export`). As of the time of writing, Archlinux does.
-
-#### Setup
-
-Install the project, by using:
+Install the project and its poetry dependencies, by using:
 
 ```bash
-poetry install
+task app:init
 ```
 
-This will install the necessary dependencies **plus the dev dependencies**, any binary shipped with the project, as well as create a dedicated virtual environment.  
-The virtual environment can be activated with:
+Run the app without entering the virtual environment with:
 
 ```bash
-source $(poetry env info -p)/bin/activate
+task app:run
 ```
 
-Alternatively, you can also source the script `activate.sh` in this repo:
+Alternatively, the virtual environment can be activated with:
 
 ```bash
 source ./activate.sh
 ```
 
-This has the advantage, over standard venvs management, that you don't need to remember the name of the environment for any project.
-If you **don't want** the dev dependencies, simply install the project with `poetry install`.
-
-You can also install the project with `pip`, since Poetry is [PEP-517 compliant](https://python-poetry.org/docs/pyproject/#poetry-and-pep-517):
+or if this doesn't work try
 
 ```bash
-pip install .
-# OR, using git+ssh
-pip install git+ssh://git@github.com:strg-at/template-streamlit.git
+source $(poetry env info -p)/bin/activate
 ```
+
+And then the streamlit app can be manually run:
+
+```bash
+streamlit run template_streamlit/main.py
+```
+
+#### Reset
+
+to remove the dependencies installed with `task app:init` run
+
+```bash
+task app:remove
+```
+
+### Using Poetry
+
+In order to use poetry, you should [install it first](https://python-poetry.org/docs/#installing-with-pipx). If your OS package manager has
+a `python-poetry` package, you might also choose to install Poetry that way. **Notice** that if you do this, you should make sure that your OS
+also ships all the necessary plugins you might want to use (most importantly, `poetry-plugin-export`). As of the time of writing, Archlinux does.
 
 #### Dependency management
 
@@ -112,23 +121,6 @@ its plugins for `mypy` etc., then you can use the `lsp-dev` group.
 poetry install --with dev --with lsp-dev
 ```
 
-##### Generating a requirements.txt
-
-You can also generate a `requirements.txt` with poetry. **NOTICE** that this is **not** mandatory at all, and should be done only for backward compatibility, IF necessary.
-First, install the `poetry-plugin-export`.
-This can be done in [several ways](https://python-poetry.org/docs/plugins/#using-plugins), depending on how you installed poetry.
-If you installed poetry via your package manager, then you should install the plugin via your package manager. For instance, on Archlinux:
-
-```bash
-sudo pacman -S python-poetry-plugin-export
-```
-
-To generate the requirements, you can then run:
-
-```bash
-poetry export --without-hashes --format=requirements.txt > requirements.txt
-```
-
 #### Version management
 
 Poetry has some nice shortcuts to manage the project version. You can see them by running
@@ -156,18 +148,6 @@ Poetry can do more than this, consult the [documentation for more information](h
 see [streamlit docs](https://docs.streamlit.io) for details
 
 #### Commands
-
-There is a **task** for running the streamlit app:
-
-```bash
-task app:run
-```
-
-Otherwise the app can also be started with the manual command:
-
-```bash
-streamlit run template_streamlit/main.py
-```
 
 Look [here](https://docs.streamlit.io/develop/quick-reference/cheat-sheet) for a cheat-sheet of commands and often used widgets
 

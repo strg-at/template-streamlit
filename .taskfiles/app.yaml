@@ -6,7 +6,13 @@ tasks:
     desc: Initialize streamlit app
     cmds:
       - poetry env use `which python 3.12`
+      - poetry add streamlit seaborn tqdm matplotlib altair pydantic plotly numpy pandas
       - poetry install
+  remove:
+    desc: Initialize streamlit app
+    cmds:
+      - poetry env use `which python 3.12`
+      - poetry remove streamlit seaborn tqdm matplotlib altair pydantic plotly numpy pandas
   run:
     desc: Run streamlit app
     cmds:

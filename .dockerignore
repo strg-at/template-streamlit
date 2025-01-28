@@ -7,7 +7,7 @@
 !test
 !pyproject.toml
 !README.md
-!template_streamlit/*.py
+!**/*.py
 
 # Ignore unnecessary files inside allowed directories
 # This should go after the allowed directories

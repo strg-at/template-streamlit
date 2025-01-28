@@ -1,27 +1,27 @@
-FROM python:3.12
+FROM python:3.12-slim
 
-RUN apt-get update && apt-get install -y pipx
+RUN apt-get update && \
+    apt-get install -y pipx --no-install-recommends && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
 COPY . .
 
-RUN useradd -m strg \
-    && chown -R strg /app
+RUN useradd -m strg && \
+    chown -R strg /app
 
 USER strg
 
-ENV PATH="/home/strg/.local/bin:$PATH"
-
-ENV POETRY_NO_INTERACTION=1 \
+ENV PATH="/home/strg/.local/bin:/app/.venv/bin:$PATH" \
+    POETRY_NO_INTERACTION=1 \
     POETRY_VIRTUALENVS_IN_PROJECT=1 \
     POETRY_VIRTUALENVS_CREATE=1
 
-RUN pipx ensurepath && pipx install poetry==1.8.4 && \
-    poetry add streamlit seaborn tqdm matplotlib altair \
-    pydantic plotly numpy pandas && poetry install
-
-ENV PATH="/app/.venv/bin:$PATH"
+RUN pipx ensurepath && \
+    pipx install poetry && \
+    poetry install
 
 EXPOSE 8501
 

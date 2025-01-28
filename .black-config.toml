@@ -1,7 +1,0 @@
-# Refer
-# https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html#configuration-via-a-file
-
-[tool.black]
-# Specify here any specific rules.
-# For instance, this is if we want max. line-length to be 120:
-line-length = 120

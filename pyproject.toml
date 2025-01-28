@@ -18,13 +18,6 @@ pydantic = "2.9.2"
 tqdm = "^4.67.1"
 numpy = "^2.2.2"
 
-# We explictly pin torch, as this is a dependency of llama-index.
-# Otherwise, torch from PyPI will bring all the nvidia deps.
-torch = [
-  {version = "^2.5.1+cpu", source = "pytorch-cpu-src", platform = "linux"},
-  {version = "^2.5.1", platform = "darwin"},
-]
-
 # [tool.poetry.group.release]
 # optional = true
 #

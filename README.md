@@ -52,13 +52,16 @@ The `pyproject.toml` configuration file can be and is also used to store 3rd par
 Install the project and its poetry dependencies, by using:
 
 ```bash
-task app:init
+poetry env use `which python 3.12`
+poetry add streamlit seaborn tqdm matplotlib altair pydantic plotly numpy pandas
+poetry add --group lsp-dev pylsp-mypy python-lsp-server
+poetry install
 ```
 
 Run the app without entering the virtual environment with:
 
 ```bash
-task app:run
+poetry run streamlit run template_streamlit/main.py
 ```
 
 Alternatively, the virtual environment can be activated with:
@@ -77,14 +80,6 @@ And then the streamlit app can be manually run:
 
 ```bash
 streamlit run template_streamlit/main.py
-```
-
-#### Reset
-
-to remove the dependencies installed with `task app:init` run
-
-```bash
-task app:remove
 ```
 
 ### Using Poetry

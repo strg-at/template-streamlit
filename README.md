@@ -14,9 +14,9 @@
 [![pre-commit][pre-commit-shield]][pre-commit-url]
 [![taskfile][taskfile-shield]][taskfile-url]
 
-# Project
+# Streamlit Template
 
-Short project description
+This repo is a template to quick start a streamlit application for proof of concept projects
 
 <details>
   <summary style="font-size:1.2em;">Table of Contents</summary>
@@ -25,9 +25,12 @@ Short project description
 
 - [Code-Style](#code-style)
 - [Getting Started](#getting-started)
+  - [Setup](#setup)
+  - [Using Poetry](#using-poetry)
+  - [Streamlit](#streamlit)
   - [Prerequisties](#prerequisties)
   - [Initialize repository](#initialize-repository)
-- [Configuration](#configuration)
+  - [Pre-commit](#pre-commit)
   - [Preparation](#preparation)
 - [Known Issues](#known-issues)
 
@@ -40,9 +43,138 @@ Short project description
 
 ## Getting Started
 
+This Python project is managed via [Poetry](https://python-poetry.org/), and leverages the [pyproject.toml](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/)
+configuration file, rather than the older `setup.py`.
+The `pyproject.toml` configuration file can be and is also used to store 3rd party tools configurations, such as black, ruff, mypy etc.
+
+### Setup
+
+Install the project and its poetry dependencies, by using:
+
+```bash
+task app:init
+```
+
+Run the app without entering the virtual environment with:
+
+```bash
+task app:run
+```
+
+Alternatively, the virtual environment can be activated with:
+
+```bash
+source ./activate.sh
+```
+
+or if this doesn't work try
+
+```bash
+source $(poetry env info -p)/bin/activate
+```
+
+And then the streamlit app can be manually run:
+
+```bash
+streamlit run template_streamlit/main.py
+```
+
+#### Reset
+
+to remove the dependencies installed with `task app:init` run
+
+```bash
+task app:remove
+```
+
+### Using Poetry
+
+In order to use poetry, you should [install it first](https://python-poetry.org/docs/#installing-with-pipx). If your OS package manager has
+a `python-poetry` package, you might also choose to install Poetry that way. **Notice** that if you do this, you should make sure that your OS
+also ships all the necessary plugins you might want to use (most importantly, `poetry-plugin-export`). As of the time of writing, Archlinux does.
+
+#### Dependency management
+
+To add a dependency, simply run:
+
+```bash
+poetry add 3rd-party-package
+```
+
+To remove a dependency, run:
+
+```bash
+poetry remove 3rd-party-package
+```
+
+To add a dev dependency, run:
+
+```bash
+poetry add dev-dep-package --group dev
+```
+
+In this template, we also create one (or more) additional dependency group(s) to deal with IDE specific dependencies.
+For instance, if you want to use the [python-lsp-server](https://github.com/python-lsp/python-lsp-server), as well as installing
+its plugins for `mypy` etc., then you can use the `lsp-dev` group.
+
+```bash
+poetry install --with dev --with lsp-dev
+```
+
+#### Version management
+
+Poetry has some nice shortcuts to manage the project version. You can see them by running
+
+```bash
+poetry version --help
+```
+
+For instance, bumping to the next minor version can be done with:
+
+```bash
+poetry version minor
+```
+
+This would be a project from, e.g., `1.2` to `1.3`. A major bump can be done with:
+
+```bash
+poetry version major
+```
+
+Poetry can do more than this, consult the [documentation for more information](https://python-poetry.org/docs/).
+
+### Streamlit
+
+see [streamlit docs](https://docs.streamlit.io) for details
+
+#### Commands
+
+Look [here](https://docs.streamlit.io/develop/quick-reference/cheat-sheet) for a cheat-sheet of commands and often used widgets
+
+#### Configuration
+
+To customize the theme or adjust rendering logic of e.g. the sidebar, create / update the `.streamlit/config.toml` file in your root folder.
+For example, as an app grows, one might want to hide the sidebar with `showSidebarNavigation = true` and implement their own menu.
+
+You can also configure server, client and browser options; for all options see the [docs](https://docs.streamlit.io/develop/api-reference/configuration/config.toml).
+
+#### Plugins and Components
+
+Available streamlit plugins can be found [here](https://streamlit.io/components).
+For example for
+
+- more [ui tools/components](https://arnaudmiribel.github.io/streamlit-extras/),
+- [additional charting](https://echarts.streamlit.app/),
+- a simple kind of [authentication](https://github.com/mkhorasani/Streamlit-Authenticator) or
+- [chatbot functionality](https://github.com/ai-yash/st-chat)
+
 ### Prerequisties
 
+Install pre-commit.
+
 - [pre-commit][pre-commit]
+- [yamllint][yamllint]
+- [taskfile][taskfile-url]
 
 ### Initialize repository
 
@@ -52,7 +184,15 @@ Pre-commit framework need to get initialized.
 task pre-commit:init
 ```
 
-## Configuration
+### Pre-commit
+
+Run the following to fix linting issues using pre-commit.
+
+```bash
+task pre-commit:run
+```
+
+Based on pre-commit gitleaks dependencies Go language needs to be installed.
 
 ### Preparation
 
@@ -72,6 +212,7 @@ git switch -c feature/INPRO-1-configure-resource
 <!-- Links -->
 
 [pre-commit]: https://pre-commit.com/
+[yamllint]: https://github.com/adrienverge/yamllint
 
 <!-- Badges -->
 

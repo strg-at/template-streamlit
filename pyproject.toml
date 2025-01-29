@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "template_streamlit"
+version = "0.1.0"
+description = "template for streamlit app"
+authors = ["strg.at"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12,<3.14"
+
+[tool.poetry.group.lsp-dev]
+optional = true
+
+[tool.poetry.group.lsp-dev.dependencies]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+# Specify here any specific rules.
+# For instance, this is if we want max. line-length to be 120:
+line-length = 120
+
+[tool.ruff]
+ignore = ["E501"]
+line-length = 120
+
+[tool.mypy]
+ignore_missing_imports = true

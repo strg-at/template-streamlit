@@ -1,0 +1,19 @@
+# Ignore everything
+*
+
+# Allow files and directories
+!template_python
+!mock_data
+!test
+!pyproject.toml
+!README.md
+!**/*.py
+!.streamlit/config.toml
+
+# Ignore unnecessary files inside allowed directories
+# This should go after the allowed directories
+**/*~
+**/*.log
+**/.DS_Store
+**/Thumbs.db
+**/__pycache__
